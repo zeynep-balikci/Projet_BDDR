@@ -1,0 +1,16 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+<h3>Nombre de publications par affiliation</h3><br>
+
+<table class="mon_tableau">
+
+<tr><th>Etablisement</th> <th>   Nombre d'articles publiés par cet établissement   </th></tr>
+    {% for a in liste_affiliations %}
+    <tr>
+      <td><a class='test external' href="/appli_covid19/affiliations/{{  a.name }}" >{{  a.name }}</a> </td>
+      <td>{{ a.nb_articles }} </td>
+    </tr>
+   {% endfor %}
+  </table>
+{% endblock %}

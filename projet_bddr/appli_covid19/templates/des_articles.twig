@@ -1,0 +1,29 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+<h3>Les articles dans la base de donnée</h3>
+<p>Il y a en tout {{ nb_articles }} d'articles dans la base de donnée.</p>
+<ol type="1">
+    {% for p in liste_articles %}
+      <li id="li2"><a class='test external' href="/appli_covid19/articles/{{ p.id_article }}" >{{ p.title }}</a></li>
+    {% endfor %}
+</ol>
+
+<div class="pagination">
+    <span class="step-links">
+        {% if liste_articles.has_previous %}
+            <input type="button" onclick="window.location.href = '?page=1';" value="<<"/>
+            <input type="button" onclick="window.location.href = '?page={{  liste_articles.previous_page_number }}';" value="précedent"/>
+        {% endif %}
+
+        <span class="current">
+            Page {{ liste_articles.number }}/{{ liste_articles.paginator.num_pages }}
+        </span>
+
+        {% if liste_articles.has_next %}
+            <input type="button" onclick="window.location.href = '?page={{ liste_articles.next_page_number }}';" value="suivant"/>
+            <input type="button" onclick="window.location.href = '?page={{ liste_articles.paginator.num_pages }}';" value=">>"/>
+        {% endif %}
+    </span>
+</div>
+{% endblock %}

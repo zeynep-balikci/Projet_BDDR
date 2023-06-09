@@ -1,0 +1,28 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+<h3>La liste des types de publications</h3>
+<p>Il y a en tout {{ nb_articles }} articles qui ont un (ou plusieurs) type de publications.</p>
+<ol type="1">
+    {% for j in liste %}
+    <li id="li2"><p class="cap"><a class='test external' href="/appli_covid19/studytypes/{{ j.name }}">{{ j.name }}</a></p></li>
+    {% endfor %}
+</ol>
+
+<div class="pagination">
+    <span class="step-links">
+        {% if liste.has_previous %}
+            <input type="button" onclick="window.location.href = '?page=1';" value="<<"/>
+            <input type="button" onclick="window.location.href = '?page={{ liste.previous_page_number }}';" value="précedent"/>
+        {% endif %}
+
+        <span class="current">
+            Page {{ liste.number }}/{{ liste.paginator.num_pages }}
+        </span>
+        {% if liste.has_next %}
+            <input type="button" onclick="window.location.href = '?page={{ liste.next_page_number }}';" value="suivant"/>
+            <input type="button" onclick="window.location.href = '?page={{ liste.paginator.num_pages }}';" value=">>"/>
+        {% endif %}
+    </span>
+</div>
+{% endblock %}

@@ -1,0 +1,65 @@
+{% extends 'base.twig' %}
+{% load extras %}
+{% block content %}
+
+<h5>{{ le_article }}</h5>
+
+<ul id="ul2">
+  <li id="li2"> 
+    {% if le_article.publish_time != NULL %}
+    Sa date de publication : {{ le_article.publish_time|date:"j F, Y" }}
+    {% else %}
+      {% if le_article.annee != NULL %}
+      L'année de publication est {{ le_article.annee }}
+      {% else %}
+      Sa date de publication est inconnue
+      {% endif %}
+    {% endif %}</li>
+  <li id="li2"> 
+      {% if le_article.journal == NULL %}
+      Journal inconnue
+      {% else %}
+      Journal : {{ le_article.journal }}
+      {% endif %}</li>
+    {% if le_article.studylink  != NULL  %}
+    <li id="li2">Lien :
+    {% with le_article.studylink|split:";" as links %}
+    {% for link in links  %}
+    <a class='test external' href="{{  link  }}" target='_blank'>{{  link  }}</a>
+    {% endfor %}
+    {% endwith %}</li>
+    {% endif %}
+    
+  <li id="li2">
+    {% if le_article.abstract != NULL %}
+    Résumé : {{ le_article.abstract }}
+    {% else %}
+    Pas de résumé disponible
+    {% endif %}</li>
+{% if study_types|length > 0 %}
+<li id="li2">Type de publications :
+{% for k in study_types %}
+  {{k.studytype}}, 
+{% endfor %}
+</li>
+{% endif %}
+
+{% if sous_theme|length > 0 %}
+<li id="li2">Sous_theme :
+{% for k in sous_theme %}
+  {{k.sous_theme}}, 
+{% endfor %}
+</li>
+{% endif %}
+
+<li id="li2"> La liste des auteurs :
+  <ul  id="ul2">
+{% for k in liste_auteurs %}
+  <li id="li2">
+  {{k.author.name}}
+  {% if k.author.email != NULL %}
+  ; email : {{k.author.email}}
+  {% endif %}</li>
+{% endfor %}
+</ul></li></ul>
+{% endblock %}

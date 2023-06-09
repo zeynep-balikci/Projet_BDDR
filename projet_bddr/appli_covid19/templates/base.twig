@@ -1,0 +1,200 @@
+{% load extras %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+  <title>Base de données covid19</title>
+	<style>
+@media (min-width: 576px) {
+  .website {
+    display: grid;
+    grid-template-columns: 400px 1fr;
+  }
+}  
+.website {min-height: 100vh;}
+.navigation-list {
+  display: grid;
+  gap: .5rem;
+}
+
+body {
+  margin: 0;
+  font-size: .85rem;
+  background-color: #fff;
+  color: #212529;
+  font-family: system-ui, sans-serif;
+  line-height: 1.5;
+}
+p.cap {
+  text-transform: capitalize;
+  margin-bottom: -.1em;
+}
+ul {
+  background: #bbb;
+  padding: 1rem;
+  list-style:none;
+}
+li {
+  background: #ccc;
+  
+}
+#ul3{
+  background: #bbb;
+  padding: 1rem;
+  list-style:none;
+  display:none;
+}
+#li3 {
+  background: #ccc;
+  display:none;
+}
+#li3:hover {
+  display:block;
+}
+#li2 {
+  background: transparent;
+}
+#ul2 {
+  background: transparent;
+  padding: 1rem;
+  list-style: circle 
+}
+article {
+  background: #888;
+  padding: 1rem;
+}
+[class*="grid"] > * {
+  background: #ccc;
+  padding: 1rem;
+}
+header, footer {
+  background: #ddd;
+  padding: 1rem;
+}
+main {
+  background:  #E5E8E8 ;
+  padding: 1rem;
+}
+aside {
+  background: #aaa;
+  padding: 1rem;
+}
+a {
+  text-decoration:none;
+  color: #212529;
+}
+/* Pas de soulignement quel que soit l'état */
+a.test 			{ text-decoration:none; }
+/* Les liens qui n'ont pas été visités sont vert */
+a.test:link 	{ color:black; }
+/* Les liens qui ont été visités sont orange */
+a.test:visited 	{ color:maroon; }
+/* Les liens lorsqu'ils sont survolés sont soulignés */
+a.test:hover 	{ text-decoration:underline;}
+.navigation-link {
+  padding: 1rem;
+  display: block;
+}
+.navigation-link:hover,
+.navigation-link:focus
+{
+  background: rgba(0,0,0,.15);
+  text-decoration:none;
+}
+.btn,
+.dropdown-toggle {
+  background: #ccc;
+  padding: 1rem;
+  border: none;
+  list-style:none;
+  width: 335px;
+  text-align: left;
+  font-size: 14px;
+  
+}
+.btn:hover,
+.btn:focus{
+  padding: 1rem;
+  border: none;
+  background: rgba(0,0,0,.15);
+}
+.dropdown-menu{
+  background: #ccc;
+}
+.dropdown-item{
+  font-size: 11px;
+}
+table.mon_tableau  {
+  border-collapse: collapse;
+}
+table.mon_tableau td {
+  border: 1px solid #5555;
+  padding: 0.3em;
+  font-family: "Sans-serif";
+  font-size: 12px;
+}
+table.mon_tableau th {
+  padding: 0.3em;
+  font-family: "Sans-serif";
+  font-size: 12px;
+}
+    table.mon_tableau tr:nth-child(even)  {background: #bbb}
+    table.mon_tableau tr:nth-child(odd) {background: #ccc }
+</style>
+</head>
+
+<body>
+<div class="website">
+  <aside class="aside">
+  <h2>Base de données covid19</h2>
+    <nav class="navigation" role="navigation">
+      <ul class="navigation-list">
+  <li class="navigation-item"><a class="navigation-link" href="/appli_covid19">Accueil</a></li>
+  <li class="navigation-item"><a class="navigation-link" href="/appli_covid19/articles">Liste des articles</a></li>
+  <li class="navigation-item"><a class="navigation-link" href="/appli_covid19/auteurs">Liste des auteurs</a></li>
+  <li class="navigation-item"><a class="navigation-link" href="/appli_covid19/journaux">Liste des journaux</a></li>
+  <li class="navigation-item"><a class="navigation-link" href="/appli_covid19/affiliations">Liste des affiliations</a></li>
+  <li class="navigation-item"><a class="navigation-link" href="/appli_covid19/studytypes">Types de publications</a></li>
+  <li class="navigation-item "><div class="dropdown dropright">
+  <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">Liste des thématiques</button>
+  <div class="dropdown-menu">
+  {% for x in themes %}
+  <a class="dropdown-item " href="/appli_covid19/theme/{{ x.name }}">{{ x.name }}</a>
+  {% endfor %}
+  </div></div></li>
+  <li class="navigation-item "><div class="dropdown dropright">
+  <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">Histogramme d'articles</button>
+  <div class="dropdown-menu">
+  <a class="dropdown-item " href="/appli_covid19/histogram_annee">Par année</a>
+  <a class="dropdown-item " href='/appli_covid19/histogram_mois'>Par mois</a>
+  <a class="dropdown-item " href='/appli_covid19/histogram_semaine'>Par semaine</a>
+  <a class="dropdown-item " href='/appli_covid19/histogram_date'>Par date</a>
+  </div></div></li>
+  <li class="navigation-item"><a class="navigation-link" href="/appli_covid19/affiliations2">Nombre de publications par affiliation</a></li>
+  <li class="navigation-item"><a class="navigation-link" href="/appli_covid19/journaux2">Liste de journaux par nombre et type de publications</a></li>
+  <li class="navigation-item"><div class="dropdown dropright">
+  <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">Recherche</button>
+  <div class="dropdown-menu">
+  <a class="dropdown-item " href='/appli_covid19/articles2'>Par titre d'article</a>
+  <a class="dropdown-item " href='/appli_covid19/journaux3'>Par nom de journal</a>
+  <a class="dropdown-item " href="/appli_covid19/affiliations3">Par nom d'affiliation</a>
+  <a class="dropdown-item " href="/appli_covid19/auteurs2">Par nom d'auteur</a>
+  </div></div></li>
+  </ul>
+  </nav>
+  </aside>
+  
+  <main id="main" role="main" class="main">
+{% block content %}
+
+{% endblock %}
+  </main>
+</div>
+</body>
+
+</html>

@@ -1,0 +1,28 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+    <h3>La liste des affiliations</h3>
+    <p>Il y a en tout {{ nb_total_affiliations }} affiliations.</p>
+<ol type="1">
+  {% for x in liste_affiliations %}
+    <li id="li2"><a class='test external' href="{{  x.name }}" >{{  x.name }}</a></li>
+  {% endfor %}
+</ol>
+<div class="pagination">
+    <span class="step-links">
+        {% if liste_affiliations.has_previous %}
+            <input type="button" onclick="window.location.href = '?page=1';" value="<<"/>
+            <input type="button" onclick="window.location.href = '?page={{  liste_affiliations.previous_page_number }}';" value="précedent"/>
+        {% endif %}
+
+        <span class="current">
+            Page {{ liste_affiliations.number }}/{{ liste_affiliations.paginator.num_pages }}
+        </span>
+
+        {% if liste_affiliations.has_next %}
+            <input type="button" onclick="window.location.href = '?page={{ liste_affiliations.next_page_number }}';" value="suivant"/>
+            <input type="button" onclick="window.location.href = '?page={{ liste_affiliations.paginator.num_pages }}';" value=">>"/>
+        {% endif %}
+    </span>
+</div>
+{% endblock %}

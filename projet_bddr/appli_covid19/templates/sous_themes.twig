@@ -1,0 +1,11 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+<h3>La liste des sous-thématiques du thème {{ theme }}</h3>
+  
+<ol type="1">
+    {% for s in sous_themes %}
+      <li id="li2"><a class='test external' href="/appli_covid19/sous_theme/{{ s.name }}">{{ s.name }}</a></li>
+    {% endfor %}
+</ol>
+{% endblock %}

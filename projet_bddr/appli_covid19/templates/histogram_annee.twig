@@ -1,0 +1,9 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+<h3>Histogramme d'articles publiés par année</h3>
+
+{% autoescape off %}
+{{ plot_div }}
+{% endautoescape %}
+{% endblock %}

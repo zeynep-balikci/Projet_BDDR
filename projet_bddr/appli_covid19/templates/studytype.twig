@@ -1,0 +1,13 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+<h3>La liste des articles qui ont le type de publication : {{ name_study }}</h3>
+
+<p>Le nombre d'articles publié avec cet type de publication est {{ nb_articles }}.</p>
+<ol type="1">
+{% for a in liste_articles %}
+  <li id="li2"><a class='test external' href="/appli_covid19/articles/{{ a.article.id_article }}" >{{ a.article.title }}</a></li>
+{% endfor %}
+</ol>
+
+{% endblock %}

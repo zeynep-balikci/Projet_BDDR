@@ -1,0 +1,28 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+<h3>Les informations sur l'auteur : {{ auteur.name }}</h3>
+{% if auteur.email != NULL %}
+<p>Email : {{ auteur.email }}</p>
+{% endif %}
+{% if liste_affiliations|length > 0 %}
+Voici les affiliations de cet auteur :
+<ol type="1">
+{% for aff in liste_affiliations %}
+  <li id="li2"><a class='test external' href="/appli_covid19/affiliations/{{ aff.affiliation.name }}" >{{ aff.affiliation.name }}</a> c'est une {{ aff.affiliation.type|lower }} 
+  {% if aff.affiliation.country != NULL %}
+  basée à {{ aff.affiliation.country|lower|title }}
+  {% endif %}
+  .</li>
+{% endfor %}
+</ol>
+{% endif %}
+
+<p>Le nombre d'articles publié par cet auteur est de {{ nb_articles }}.</p>
+<ol type="1">
+{% for a in liste_articles %}
+  <li id="li2"><a class='test external' href="/appli_covid19/articles/{{ a.article.id_article }}" >{{ a.article.title }}</a></li>
+{% endfor %}
+</ol>
+
+{% endblock %}

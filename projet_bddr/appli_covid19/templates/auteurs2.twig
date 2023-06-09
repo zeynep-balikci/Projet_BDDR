@@ -1,0 +1,23 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+<h3>Recherche</h3>
+  
+<form method="POST">
+{% csrf_token %}
+<p>
+<label for="username"> Nom d'un article </label>
+<input id="username" type="text" name="username">
+
+<button type="submit">Rechercher</button></p>
+</form>
+
+{% if username is not null and username != ""%}
+<p>Voici les auteurs qui contiennent "{{ username }}" dans leur nom. </p>
+<ol type="1">
+  {% for p in liste_auteurs %}
+    <li id="li2"><a class="test external" href="/appli_covid19/auteurs/{{ p.name }}">{{ p.name }}</a></li>
+  {% endfor %}
+</ol>
+{% endif %}
+{% endblock %}

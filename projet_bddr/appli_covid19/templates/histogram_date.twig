@@ -1,0 +1,30 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+<h3>Histogramme d'articles publiés par date</h3>
+<p>Vous pouvez faire une recherche entre {{ min_date|date:"Y-m-d" }}  et {{ max_date|date:"Y-m-d" }} (sous cette format : Année-Mois-Jour).</p>
+<form method="POST">
+{% csrf_token %}
+<p>
+<label for="debut"> Entre la date </label>
+<input id="debut" type="text" name="debut">
+<label for="fin"> et la date </label>
+<input id="fin" type="text" name="fin">
+<button type="submit">Rechercher</button></p>
+</form>
+
+
+{% if debut is not null and debut != "" and fin is not null and fin != ""  %}
+
+<p>Voici l'histogramme d'articles publiés entre {{ debut|date:"Y-m-d" }} et {{ fin|date:"Y-m-d" }}. </p>
+{% autoescape off %}
+{{ plot_div }}
+{% endautoescape %}
+{% else %}
+On prend en compte toutes les années.
+{% autoescape off %}
+{{ plot_div }}
+{% endautoescape %}
+{% endif %}
+
+{% endblock %}

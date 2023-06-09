@@ -1,0 +1,26 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+<h3>Histogramme d'articles publiés par mois</h3>
+<p>Vous pouvez faire une recherche entre {{ min_year }}  et {{ max_year }}.</p>
+<form method="POST">
+{% csrf_token %}
+<p>
+<label for="username"> Une année particulière </label>
+<input id="username" type="text" name="username">
+<button type="submit">Rechercher</button></p>
+</form>
+
+{% if username is not null and username != "" %}
+<p>Voici l'histogramme d'articles publiés par mois de l'année {{ username }}. </p>
+{% autoescape off %}
+{{ plot_div }}
+{% endautoescape %}
+{% else %}
+On prend en compte toutes les années.
+{% autoescape off %}
+{{ plot_div }}
+{% endautoescape %}
+{% endif %}
+
+{% endblock %}

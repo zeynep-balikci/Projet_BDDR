@@ -1,11 +1,10 @@
 # M1 Data Science - Projet BDDR (2022 - 2023)
 
-## Binôme Zeynep BALIKCI et Mariama MBAYE
-
-
 Le sujet se trouve dans "1_Sujet.pdf".
 
 Le schéma (3_Schema.pdf) a été créé sur le site : https://dbdiagram.io/d grâce au script dans le fichier : "2_diagram_script.txt".
+
+Le jeu de données peut être téléchargé à partir de : https://www.kaggle.com/datasets/allen-institute-for-ai/CORD-19-research-challenge?resource=download
 
 ### Etapes pour le projet:
 
@@ -51,15 +50,15 @@ python manage.py migrate
 
 Exécuter le fichier Peuple1.py sur le terminal (pas besoin de changer quoi que soit dans le script du fichier).
 
-! Attention ! sur Unic il faut rendre exécutable ce fichier avec : chmod +x Peuple1.py
+! Attention ! sur Unix il faut rendre exécutable ce fichier avec : chmod +x Peuple1.py
 
 Entrer les informations nécessaires demandé après l'exécution : chemin_archive, host, etc...
 
 Exemples : chemin_archive = /users/2023/ds1/share/CORD-19
 
-HOST = data
+HOST = localhost
 
-DB_NAME = zbalikci
+DB_NAME = covid19
 
 USER_NAME = zbalikci 
 
@@ -69,7 +68,7 @@ Le peuplement de ces tables est terminé au bout d'1 heure et 10 minutes environ
 
 - Étape 4.2 : Pour peupler les tables les tables Articles, Article_Theme et StudyType_Articles.
 
-Exécuter le fichier Peuple2.py du dossier projet_bddr, pour cela vous devez utilisez le shell de DJANGO avec : (dans ./projet_bddr)
+Exécuter le fichier Peuple2.py du dossier projet_bddr, pour cela vous devez utilisez (dans ./projet_bddr) le shell de DJANGO avec : 
 
 ```bash
 python manage.py shell
